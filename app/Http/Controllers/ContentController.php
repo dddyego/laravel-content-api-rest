@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
-
+    
     public function index()
     {
         return Content::all();
@@ -22,12 +22,11 @@ class ContentController extends Controller
     {
         $contentData = $request->all();
 
-        $content = [];
-        $content['title']     = $contentData['title'];
-        $content['autores']   = json_encode($contentData['autores']);
-        $content['conteudos_relacionados'] = json_encode($contentData['conteudos_relacionados']);
-
-        Content::create($content);
+        $content = new Content();
+        $content->title     = $contentData['title'];
+        $content->autores   = json_encode($contentData['autores']);
+        $content->conteudos_relacionados = json_encode($contentData['conteudos_relacionados']);
+        $content->save();
 
         return ['msg' => 'Conteudo criado com sucesso'];
     }
